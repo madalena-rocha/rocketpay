@@ -17,6 +17,11 @@
   align-items: center;
 }
 
+.cc-logo span:nth-child(2) img {
+  max-width: 5.1rem;
+  max-height: 3rem;
+}
+
 .cc-info {
   display: grid;
   gap: 1.4rem;

@@ -10,6 +10,13 @@ function setCardType(type) {
   const colors = {
     visa: ["#436D99", "#2D57F2"],
     mastercard: ["#DF6F29", "#C69347"],
+    americanExpress: ["#0019F6", "#2496FD"],
+    discover: ["#563C86", "#53555E"],
+    diners: ["#E8BE31", "#9DB53C"],
+    jcb15: ["#57E140", "#73863C"],
+    jcb: ["#21FF0E", "#A5F54D"],
+    maestro: ["#5D24FF", "#53555E"],
+    unionpay: ["#15E6F3", "#53555E"],
     default: ["black", "gray"],
   }
 
@@ -71,6 +78,41 @@ const cardNumberPattern = {
       cardtype: "mastercard",
     },
     {
+      mask: "0000 000000 00000",
+      regex: /^3[47]\d{0,13}/,
+      cardtype: "americanExpress",
+    },
+    {
+      mask: "0000 0000 0000 0000",
+      regex: /^(?:6011|65\d{0,2}|64[4-9]\d?)\d{0,12}/,
+      cardtype: "discover",
+    },
+    {
+      mask: "0000 000000 0000",
+      regex: /^3(?:0([0-5]|9)|[689]\d?)\d{0,11}/,
+      cardtype: "diners",
+    },
+    {
+      mask: "0000 000000 00000",
+      regex: /^(?:2131|1800)\d{0,11}/,
+      cardtype: "jcb15",
+    },
+    {
+      mask: "0000 0000 0000 0000",
+      regex: /^(?:35\d{0,2})\d{0,12}/,
+      cardtype: "jcb",
+    },
+    {
+      mask: "0000 0000 0000 0000",
+      regex: /^(?:5[0678]\d{0,2}|6304|67\d{0,2})\d{0,12}/,
+      cardtype: "maestro",
+    },
+    {
+      mask: "0000 0000 0000 0000",
+      regex: /^62\d{0,14}/,
+      cardtype: "unionpay",
+    },
+    {
       mask: "0000 0000 0000 0000",
       cardtype: "default",
     },
@@ -84,10 +126,8 @@ const cardNumberPattern = {
       return number.match(item.regex)
     })
     // verifica se o número está de acordo com o regex
-
-    // compiledMasks pega todo o array de masks
-    // find procura no array de máscaras
     // se o retorno da função passada no find for verdadeiro, encontrou o elemento e retorna o elemento, se for falso, retorna undefined
+
     return foundMask
   },
 }
@@ -128,10 +168,10 @@ cardNumberMasked.on("accept", () => {
   const cardType = cardNumberMasked.masked.currentMask.cardtype
   // saber qual o tipo do cartão selecionado
   setCardType(cardType)
-  updatecardNumber(cardNumberMasked.value)
+  updateCardNumber(cardNumberMasked.value)
 })
 
-function updatecardNumber(number) {
+function updateCardNumber(number) {
   const ccNumber = document.querySelector(".cc-number")
 
   ccNumber.innerText = number.length === 0 ? "1234 5678 9012 3456" : number
