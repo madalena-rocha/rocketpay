@@ -15,11 +15,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-height: 3rem;
 }
 
 .cc-logo span:nth-child(2) img {
   max-width: 5.1rem;
-  max-height: 3rem;
 }
 
 .cc-info {

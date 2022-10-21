@@ -11,12 +11,12 @@ function setCardType(type) {
     visa: ["#436D99", "#2D57F2"],
     mastercard: ["#DF6F29", "#C69347"],
     americanExpress: ["#0019F6", "#2496FD"],
-    discover: ["#563C86", "#53555E"],
-    diners: ["#E8BE31", "#9DB53C"],
-    jcb15: ["#57E140", "#73863C"],
+    discover: ["#E8BE31", "#9DB53C"],
+    diners: ["#114F99", "#4959EC"],
+    jcb15: ["#4959EC", "#5CCEFF"],
     jcb: ["#21FF0E", "#A5F54D"],
-    maestro: ["#5D24FF", "#53555E"],
-    unionpay: ["#15E6F3", "#53555E"],
+    maestro: ["#292D98", "#8F00FF"],
+    unionpay: ["#2051FF", "#5D24FF"],
     default: ["black", "gray"],
   }
 
@@ -123,10 +123,10 @@ const cardNumberPattern = {
     // pega o valor do dynamicMasked e concatena com o número digitado
     // se a tecla pressionada não for dígito, troca por vazio
     const foundMask = dynamicMasked.compiledMasks.find(function (item) {
+      // se o retorno da função passada no find for verdadeiro, encontrou o elemento e retorna o elemento, se for falso, retorna undefined
       return number.match(item.regex)
+      // verifica se o número está de acordo com o regex
     })
-    // verifica se o número está de acordo com o regex
-    // se o retorno da função passada no find for verdadeiro, encontrou o elemento e retorna o elemento, se for falso, retorna undefined
 
     return foundMask
   },
@@ -148,8 +148,8 @@ cardHolder.addEventListener("input", () => {
 
   ccHolder.innerText =
     cardHolder.value.length === 0 ? "FULANO DA SILVA" : cardHolder.value
-  // garantir que mesmo quando apagar o nome do titular continue o Fulano da Silva
-  // se o tamanho do conteúdo for 0, mostra Fulano da Silva, se não, mostra o conteúdo
+  // garante que mesmo quando apagar o nome do titular continue o "Fulano da Silva"
+  // se o tamanho do conteúdo for 0, mostra "Fulano da Silva", se não, mostra o conteúdo
 })
 
 securityCodeMasked.on("accept", () => {
